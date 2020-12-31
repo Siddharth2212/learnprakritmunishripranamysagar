@@ -4,6 +4,7 @@ import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-nativ
 import {getFromAsync, storeInAsync} from '../utils/utils';
 import {axiosPost} from '../service/apiCall';
 import {AppLoader} from '../utils/appLoader';
+import * as Device from 'expo-device';
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -12,12 +13,17 @@ export default class Login extends React.Component {
       email:'',
       password:'',
       validated : true,
+      devicetype : "",
       passwordValidated: true,
       secureEntry: true,
       isAppLoader: false,
     }
 }
 
+async componentDidMount(){
+  const devicetype = await Device.getDeviceTypeAsync();
+  this.setState({devicetype: devicetype});
+}
 
 _onPressForgotPassword() {
   this.props.navigation.navigate('ForgotPassword')
@@ -90,7 +96,7 @@ _onPostCall(email, password){
         keyboardVerticalOffset={Platform.OS === 'ios'? -250: 0}
         style={{flex: 1}}
         >
-      <ImageBackground source={require('../assets/images/login_background.png')} style={styles.image}>
+      <ImageBackground source={require('../assets/images/login_background.png')} style={this.state.devicetype == Device.DeviceType.PHONE ? styles.image : styles.imageweb}>
         <View style={styles.scrollView}>
       <Image style={styles.stretch} source={require('../assets/images/logo.png')}/>
       <Text style={styles.textTitle}>Welcome Back</Text>
@@ -199,6 +205,13 @@ const styles = StyleSheet.create({
   },
   image: {
     width:wp('100%'),
+    height: hp("100%"),
+    resizeMode: "cover",
+    flexDirection:'column'
+  },
+  imageweb: {
+    width:wp('100%'),
+    height: 'auto',
     resizeMode: "cover",
     flexDirection:'column'
   },

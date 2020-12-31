@@ -67,12 +67,12 @@ export default function App() {
 
   if(true){
     return (
-      <MainScreen/>
+      <Main/>
     );
   }
   else{
     return (
-      <MainScreen/>
+      <Main/>
     );
   }
 

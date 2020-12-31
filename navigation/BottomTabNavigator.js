@@ -2,66 +2,38 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as React from 'react';
 
 import { Icon } from 'react-native-elements'
-// import LibraryScreen from '../screens/screens/LibraryScreen';
-// import MeditationScreen from '../screens/screens/MeditationScreen';
-// import ListScreen from '../screens/screens/ListScreen';
-// import VideoScreen from '../screens/screens/VideoScreen';
-// import LibraryScreen from '../screens/screens/LibraryScreen';
-// import ProfileScreen from '../screens/screens/ProfileScreen';
-import { View, Text, BackHandler, Alert } from "react-native"
+import {  BackHandler, Alert } from "react-native"
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
 import { createStackNavigator } from '@react-navigation/stack';
-// import LibraryScreen from '../screens/LibraryScreen';
-// import MeditationScreen from '../screens/MeditationScreen';
-// import ListScreen from '../screens/ListScreen';
-// import VideoScreen from '../screens/VideoScreen';
-import ProfileScreen from '../screens/ProfileScreen';
+import MeditationScreen from '../screens/MeditationScreen';
+import AboutScreen from '../screens/AboutScreen';
 import HomeScreen from '../screens/HomeScreen';
-import DetailScreen from '../screens/DetailScreen';
-import TimelineScreen from '../screens/TimelineScreen';
-import NotificationScreen from '../screens/NotificationScreen';
-import Login from '../components/LoginComponent';
+import ListScreen from '../screens/ListScreen';
 
-function SettingsScreen(props) {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      {/* <Text>Welcome {props.user.phoneNumber}!</Text> */}
-    </View>
-  );
-}
 
 const HomeStack = createStackNavigator();
 
-function HomeStackScreen() {
+function BookStackScreen() {
   return (
     <HomeStack.Navigator>
       {/* <HomeStack.Screen options={{headerShown: false}} name="Login" component={Login} /> */}
       <HomeStack.Screen options={{
         headerShown: false
       }} name="Home" component={HomeScreen} />
-      <HomeStack.Screen options={{
-        headerShown: false
-      }} name="Detail" component={DetailScreen} />
-      <HomeStack.Screen options={{
-        headerShown: false
-      }} name="Timeline" component={TimelineScreen} />
     </HomeStack.Navigator>
   );
 }
 
-function NotificationStackScreen() {
+function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen options={{
         headerShown: false
-      }} name="Notifications" component={NotificationScreen} />
+      }} name="MeditationScreen" component={MeditationScreen} />
       <HomeStack.Screen options={{
         headerShown: false
-      }} name="Detail" component={DetailScreen} />
-      <HomeStack.Screen options={{
-        headerShown: false
-      }} name="Timeline" component={TimelineScreen} />
+      }} name="List" component={ListScreen} />
     </HomeStack.Navigator>
   );
 }
@@ -69,12 +41,12 @@ function NotificationStackScreen() {
 
 const SettingsStack = createStackNavigator();
 
-function ProfileStackScreen() {
+function AboutStackScreen() {
   return (
     <SettingsStack.Navigator>
       <SettingsStack.Screen options={{
         headerShown: false
-      }} name="Profile" component={ProfileScreen} />
+      }} name="About" component={AboutScreen} />
     </SettingsStack.Navigator>
   );
 }
@@ -109,34 +81,34 @@ export default function BottomTabNavigator({ navigation, route }) {
 
   return (
     <BottomTab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+
+        if (route.name === 'Home') {
+          iconName = 'home';
+        } else if (route.name === 'Books') {
+          iconName = 'book';
+        }
+        else if (route.name === 'About') {
+          iconName = 'info-circle';
+        }
+
+        // You can return any component that you like here!
+        return <Icon name={iconName} type="font-awesome-5" size={size} color={color} />;
+      },
+    })}
     tabBarOptions={{
-      activeTintColor: '#8c52ff',
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray',
     }}
       initialRouteName={INITIAL_ROUTE_NAME}>
       <BottomTab.Screen
         name="Home"
         component={HomeStackScreen}
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ focused }) => <Icon
-          type='font-awesome-5'
-          name='home' />,
-        }}
       />
-        <BottomTab.Screen name="Knowledge Bytes" component={NotificationStackScreen}
-        options={{
-          title: 'Notifications',
-          tabBarIcon: ({ focused }) => <Icon
-          type='font-awesome-5'
-          name='bell' />,
-        }} />
-        <BottomTab.Screen name="Profile" component={ProfileStackScreen}
-        options={{
-          title: 'Profile',
-          tabBarIcon: ({ focused }) => <Icon
-          type='font-awesome-5'
-          name='user' />,
-        }} />
+        <BottomTab.Screen name="Books" component={BookStackScreen}/>
+        <BottomTab.Screen name="About" component={AboutStackScreen}/>
 
     </BottomTab.Navigator>
   );

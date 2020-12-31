@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Dimensions, FlatList, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Dimensions, FlatList, StyleSheet } from 'react-native';
 var { width, height } = Dimensions.get('window');// You can import from local files
-import { Icon, Button as Alias, Card, Image, Text, ListItem, Avatar } from 'react-native-elements';
+import { ListItem, Avatar } from 'react-native-elements';
 import { DataCall } from "./utils/DataCall";
-import { Button, Appbar, Searchbar, IconButton } from 'react-native-paper';
+import { Card, Button, Appbar, Searchbar, ActivityIndicator, Colors } from 'react-native-paper';
 import Moment from 'moment';
 
 class Tab extends Component {
@@ -69,7 +69,7 @@ class Tab extends Component {
         <ListItem.Content>
           <ListItem.Title>{item.playlistname}</ListItem.Title>
                 <Card.Actions style={{ flex: 1, justifyContent: "space-around", width: "100%" }}>
-                    <Button icon="page-next" onPress={() => this.props.navigation.navigate("List", { playlistid: item.playlistid, typeofplaylist: "knowledgebytes" })}>Watch Playlist</Button>
+                    <Button icon="page-next" onPress={() => this.props.navigation.navigate("List", { playlistid: item.playlistid, typeofplaylist: "meditations" })}>Watch Playlist</Button>
                 </Card.Actions>
         </ListItem.Content>
       </ListItem>
@@ -81,25 +81,27 @@ class Tab extends Component {
             console.log(this.state.searchQuery);
             this.fetchMoreData(query);
         };
-        
         Moment.locale('en');
         return (
             <>
                 <Appbar.Header>
-                    <Appbar.Content title="Profile" />
+                    <Appbar.Content title="By Munishri Pranamyasagar ji" />
+                    {/* <Appbar.Action icon="dots-vertical" onPress={_handleMore} /> */}
                 </Appbar.Header>
                 {this.state.showSearch && <Searchbar
                     placeholder="Search"
                     onChangeText={onChangeSearch}
                     value={this.state.searchQuery}
                 />}
-                <View style={styles.container}>
-                <Text h4 style={{textAlign: "center"}}>Welcome</Text>
-              
-            <Button icon="page-next">Logout</Button>
-
-            </View>
-               
+                <FlatList
+                    keyExtractor={this.keyExtractor}
+                    data={[{
+                        playlistname: "Learn Prakrit",
+                        playlistid: "PLORe5EDfN6SodLQO-Mkh_KLQ93rsH7-CC"
+                    }]}
+                    renderItem={this.renderItem}
+                    keyExtractor={item => item.playlistid.toString()}
+                />
             </>
         )
     }
@@ -115,25 +117,7 @@ const styles = StyleSheet.create({
         color: '#2196f3',
         fontSize: 14,
         fontWeight: 'bold'
-    },
-    container: {
-        flex: 1,
-        justifyContent: "center"
-      },
-      logoImg: {
-        width: 145,
-        height: 145,
-        marginBottom: 20,
-        alignSelf: 'center',
-      },
-      logoText: {
-        color: '#F3BA1D',
-        alignSelf: 'center',
-        marginBottom: 30,
-        fontSize: 20,
-        lineHeight: 28,
-        textAlign: 'center',
-      }
+    }
 });
 
 export default Tab

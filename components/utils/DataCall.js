@@ -9,8 +9,6 @@ export class DataCall {
     static async getvideos(playlistid) {
         var responseHusky = await fetch('https://arhamyoga.herokuapp.com/getvideos?playlistid='+playlistid);
         const responseJsonHusky = await responseHusky.json();
-        console.log("then here");
-        console.log(responseJsonHusky)
         return responseJsonHusky;
     }
 }

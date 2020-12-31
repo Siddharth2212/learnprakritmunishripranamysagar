@@ -1,23 +1,24 @@
 import { NavigationContainer } from '@react-navigation/native';
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import Home from './HomeComponent';
-import Login from './LoginComponent';
-import Loginotp from './LoginotpComponent';
+import BottomTabNavigator from '../navigation/BottomTabNavigator';
 import { createStackNavigator } from '@react-navigation/stack';
+import Login from './LoginComponent';
+
 
 const Stack = createStackNavigator();
 
 
-export default function App(props) {
+function MainScreen(props) {
   return(
     <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
         <NavigationContainer>
-        <Stack.Navigator>
-        <Stack.Screen options={{headerShown: false}} name="Home" component={Home} />
-        <Stack.Screen options={{headerShown: false}} name="Login" component={Login} />
-        <Stack.Screen options={{headerShown: false}} name="Loginotp" component={Loginotp} />
+        <Stack.Navigator screenOptions={{
+    headerShown: false
+  }}>
+          <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Root" component={BottomTabNavigator} />
     </Stack.Navigator>
         </NavigationContainer>
       </View>
@@ -30,3 +31,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+export default MainScreen;

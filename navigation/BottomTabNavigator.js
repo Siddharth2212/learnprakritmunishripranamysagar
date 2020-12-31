@@ -21,6 +21,7 @@ import HomeScreen from '../screens/HomeScreen';
 import DetailScreen from '../screens/DetailScreen';
 import TimelineScreen from '../screens/TimelineScreen';
 import NotificationScreen from '../screens/NotificationScreen';
+import Login from '../components/LoginComponent';
 
 function SettingsScreen(props) {
   return (
@@ -35,6 +36,7 @@ const HomeStack = createStackNavigator();
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
+      {/* <HomeStack.Screen options={{headerShown: false}} name="Login" component={Login} /> */}
       <HomeStack.Screen options={{
         headerShown: false
       }} name="Home" component={HomeScreen} />

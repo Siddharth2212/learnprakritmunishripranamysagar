@@ -5,7 +5,6 @@ import { Icon, Button as Alias, Card, Image, Text, ListItem, Avatar } from 'reac
 import { DataCall } from "./utils/DataCall";
 import { Button, Appbar, Searchbar, IconButton } from 'react-native-paper';
 import Moment from 'moment';
-import auth from '@react-native-firebase/auth';
 
 class Tab extends Component {
     constructor(props) {
@@ -25,69 +24,6 @@ class Tab extends Component {
     static navigationOptions = {
         header: null
     };
-
-    componentDidMount() {
-        this.fetchMoreData(-1);
-        var user = auth().currentUser;
-        fetch("https://arhamyoga.herokuapp.com/trackerdetails", {
-            method: "POST",
-            headers: new Headers({
-                'Content-Type': 'application/json',
-            }),
-            body: JSON.stringify(user) // <-- Post parameters        
-        })
-        .then((response) => {
-            console.log("__apeghhipaegapehgaeghere");
-            return response.json()
-          })
-          .then((data) => {
-            // Work with JSON data here
-            console.log(data);
-            this.setState({meditationplaylist: data.meditationplaylist, 
-                meditationvideo: data.meditationvideo, 
-                knowledgebyteplaylist: data.knowledgebyteplaylist,
-                meditationplaylistvideos: data.meditationplaylistvideos, 
-                meditationvideovideos: data.meditationvideovideos, 
-                knowledgebyteplaylistvideos: data.knowledgebyteplaylistvideos                
-            })
-          })
-          .catch((err) => {
-              console.log(err);
-            // Do something for an error here
-          })
-    }
-
-    async fetchMoreData(query) {
-
-        if (!this.state.inProgressNetworkReq) {
-            //To prevent redundant fetch requests. Needed because cases of quick up/down scroll can trigger onEndReached
-            //more than once
-            if (query == -1) {
-                this.setState({
-                    inProgressNetworkReq: true
-                });
-                const data = await DataCall.get(query, "knowledgebytes");
-                console.log("__ahoegage");
-                console.log(data);
-                this.setState({
-                    data: data,
-                    count: this.state.count + 1,
-                    inProgressNetworkReq: false
-                });
-            }
-            else {
-                this.setState({
-                    inProgressNetworkReq: true
-                });
-                const data = await DataCall.get(query);
-                this.setState({
-                    data: data,
-                    count: this.state.count + 1,
-                    inProgressNetworkReq: false
-                });
-            }
-        }
-    }
 
     onLayout = event => {
         let { width, height } = event.nativeEvent.layout
@@ -158,9 +94,9 @@ class Tab extends Component {
                     value={this.state.searchQuery}
                 />}
                 <View style={styles.container}>
-                <Text h4 style={{textAlign: "center"}}>Welcome {(auth().currentUser.displayName)}</Text>
+                <Text h4 style={{textAlign: "center"}}>Welcome</Text>
               
-            <Button icon="page-next" onPress={() => auth().signOut().then(() => console.log('User signed out!'))}>Logout</Button>
+            <Button icon="page-next">Logout</Button>
 
             </View>
                

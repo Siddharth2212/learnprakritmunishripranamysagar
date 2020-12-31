@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import BottomTabNavigator from '../navigation/BottomTabNavigator';
 import { createStackNavigator } from '@react-navigation/stack';
+import Login from './LoginComponent';
 
 
 const Stack = createStackNavigator();

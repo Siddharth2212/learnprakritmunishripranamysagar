@@ -6,7 +6,7 @@ import {  BackHandler, Alert } from "react-native"
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
 import { createStackNavigator } from '@react-navigation/stack';
-import MeditationScreen from '../screens/MeditationScreen';
+import LearnScreen from '../screens/LearnScreen';
 import AboutScreen from '../screens/AboutScreen';
 import HomeScreen from '../screens/HomeScreen';
 import ListScreen from '../screens/ListScreen';
@@ -30,7 +30,7 @@ function HomeStackScreen() {
     <HomeStack.Navigator>
       <HomeStack.Screen options={{
         headerShown: false
-      }} name="MeditationScreen" component={MeditationScreen} />
+      }} name="LearnScreen" component={LearnScreen} />
       <HomeStack.Screen options={{
         headerShown: false
       }} name="List" component={ListScreen} />

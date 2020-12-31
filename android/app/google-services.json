@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "327833454223",
+    "firebase_url": "https://digitalbrand-ac4e1.firebaseio.com",
+    "project_id": "digitalbrand-ac4e1",
+    "storage_bucket": "digitalbrand-ac4e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:327833454223:android:6e1969cfe38cca2983d2fa",
+        "android_client_info": {
+          "package_name": "com.ampdigital.digitalbrandingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "327833454223-ks95dkvolqi5sjq8nt1j8108ihojtiq1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtmYv98yh_UoIJ8EV0Jj461rnD01R5voI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "327833454223-ks95dkvolqi5sjq8nt1j8108ihojtiq1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
